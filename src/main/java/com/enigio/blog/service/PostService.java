@@ -5,12 +5,10 @@ import com.enigio.blog.entities.User;
 import com.enigio.blog.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-//@Component
-@Service
+@Component
 public class PostService {
 
     @Autowired

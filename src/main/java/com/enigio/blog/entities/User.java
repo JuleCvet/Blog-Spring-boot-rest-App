@@ -1,7 +1,6 @@
 package com.enigio.blog.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.List;

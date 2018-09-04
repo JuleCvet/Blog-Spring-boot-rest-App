@@ -7,7 +7,6 @@ import com.enigio.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -31,7 +30,6 @@ public class UserController {
         else if(userService.getUser(userRegistration.getUsername()) != null)
             return "Error this username already exists";
 
-        //Checking for non alphanumerical characters in the username.
         Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
         if(pattern.matcher(userRegistration.getUsername()).find())
             return "No special characters are allowed in the username";

@@ -10,7 +10,6 @@ import com.enigio.blog.service.PostService;
 import com.enigio.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -81,5 +80,4 @@ public class BlogController {
         commentService.comment(new Comment(comment.getText(),post,creator));
         return true;
     }
-
 }

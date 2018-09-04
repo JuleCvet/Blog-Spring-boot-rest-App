@@ -17,28 +17,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.Arrays;
 
 @SpringBootApplication
-public class BlogApplication {
+public class BlogApplication extends SpringBootServletInitializer {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
 	public static void main(String[] args) {
-		SpringApplication.run(BlogApplication.class, args);
-	}
-	/*public static void main(String[] args) {
 		new BlogApplication()
 				.configure(new SpringApplicationBuilder(BlogApplication.class))
 				.run(args);
-	}extends SpringBootServletInitializer */
+	}
 
 
-	/**
-	 * Password grants are switched on by injecting an AuthenticationManager.
-	 * Here, we setup the builder so that the userDetailsService is the one we coded.
-	 * @param builder
-	 * @param repository
-	 * @throws Exception
-	 */
 	@Autowired
 	public void authenticationManager(AuthenticationManagerBuilder builder, UserRepository repository, UserService userService) throws Exception {
 		if (repository.count()==0)
@@ -46,11 +36,6 @@ public class BlogApplication {
 		builder.userDetailsService(userDetailsService(repository)).passwordEncoder(passwordEncoder);
 	}
 
-	/**
-	 * We return an istance of our CustomUserDetails.
-	 * @param repository
-	 * @return
-	 */
 	private UserDetailsService userDetailsService(final UserRepository repository) {
 		return username -> new CustomUserDetails(repository.findByUsername(username));
 	}
