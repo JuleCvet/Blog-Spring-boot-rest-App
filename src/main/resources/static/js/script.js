@@ -11,8 +11,19 @@ function delete_cookie(name) {
     document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
+function isAnonymous(name){
+    return name == "anonimousUser";
+}
 window.Event = new Vue({
     data: {isLoggedIn: false}
+});
+
+var vueLog= new Vue({
+    el: '#loggedIn',
+    data: {logged_in_msg: ""},
+    mounted(){
+        var isLoggedIn= false;
+    }
 });
 
 Vue.component('login-component',{
