@@ -37,18 +37,18 @@ public class BlogController {
         return postService.getPost(id);
     }
 
-    @PostMapping(value="/post")
-    public String publishPost(@RequestBody Post post){
-        //CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(post.getDateCreated() == null)
-            post.setDateCreated(new Date());
-        //post.setCreator(userService.getUser(userDetails.getUsername()));
-        post.setCreator(userService.getUser("admin"));
+    @PostMapping(value="/post")//postman
+    public String publishPost(@RequestBody Post post){//mapped so @RequestBody
+        CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(post.getDateCreated() == null)//ako ne naglasime vreme, ni go dava lokalnto vreme so postMan (kako timeStamp)
+            post.setDateCreated(new Date());//ke treba ekstra da se implementira so vue.
+        post.setCreator(userService.getUser(userDetails.getUsername()));
+        //post.setCreator(userService.getUser("admin"));
         postService.insert(post);
         return "Post was published";
     }
 
-    @GetMapping(value="/posts/{username}")
+    @GetMapping(value="/posts/{username}")//postMan + admin
     public List<Post> postsByUser(@PathVariable String username){
         return postService.findByUser(userService.getUser(username));
     }
@@ -72,7 +72,8 @@ public class BlogController {
     @PostMapping(value = "/post/postComment")
     public boolean postComment(@RequestBody CommentPojo comment){
         Post post = postService.find(comment.getPostId());
-        CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.
+                getContext().getAuthentication().getPrincipal();
         User creator = userService.getUser(userDetails.getUsername());
         if(post == null || creator == null)
             return false;

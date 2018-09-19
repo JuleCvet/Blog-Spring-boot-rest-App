@@ -21,7 +21,10 @@ public class UserController {
 
     @Autowired
     private TokenStore tokenStore;
-
+//Helper that translates between JWT (JSON web token) encoded token values and
+//Read the authentication stored under the specified token value, with its methods, or remove the same
+//Signed tokens can verify the integrity of the claims contained within it, while
+// encrypted tokens hide those claims from other parties.
 
     @PostMapping(value = "/register")
     public String register(@RequestBody UserRegistration userRegistration){
@@ -34,7 +37,8 @@ public class UserController {
         if(pattern.matcher(userRegistration.getUsername()).find())
             return "No special characters are allowed in the username";
 
-        userService.save(new User(userRegistration.getUsername(), userRegistration.getPassword(), Arrays.asList(new Role("USER"), new Role("ACTUATOR"))));
+        userService.save(new User(userRegistration.getUsername(), userRegistration.getPassword(),
+                Arrays.asList(new Role("USER"), new Role("ACTUATOR"))));
         return "User created";
     }
 

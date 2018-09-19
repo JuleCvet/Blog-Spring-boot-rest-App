@@ -28,15 +28,22 @@ public class BlogApplication extends SpringBootServletInitializer {
 				.run(args);
 	}
 
+//Добивките за лозинка се вклучуваат со инјектирање на AuthenticationManager.
+// we setup the builder so that the userDetailsService is the one we coded
 
 	@Autowired
-	public void authenticationManager(AuthenticationManagerBuilder builder, UserRepository repository, UserService userService) throws Exception {
-		if (repository.count()==0)
-			userService.save(new User("admin", "adminPassword", Arrays.asList(new Role("USER"), new Role("ACTUATOR") , new Role("ADMIN"))));
+	public void authenticationManager(AuthenticationManagerBuilder builder,
+									  UserRepository repository, UserService userService) throws Exception {
+
+		if (repository.count()==0)//so save mozime poveke useri da dozvolime(isto + array.asList)
+			userService.save(new User("admin", "adminPassword",
+					Arrays.asList(new Role("USER"), new Role("ACTUATOR") , new Role("ADMIN"))));
+		userService.save(new User("Jule", "Jule",
+				Arrays.asList(new Role("USER"), new Role("ACTUATOR"), new Role("ADMIN"))));
 		builder.userDetailsService(userDetailsService(repository)).passwordEncoder(passwordEncoder);
 	}
 
 	private UserDetailsService userDetailsService(final UserRepository repository) {
 		return username -> new CustomUserDetails(repository.findByUsername(username));
-	}
+	}//We return an instance of our CustomUserDetails
 }

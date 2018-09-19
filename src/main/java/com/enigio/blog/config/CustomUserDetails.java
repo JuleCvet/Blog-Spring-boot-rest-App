@@ -13,7 +13,7 @@ import java.util.List;
 public class CustomUserDetails implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
-    private String password;
+    private String password;//nashite user properties
     private String username;
 
     public CustomUserDetails(User user) {
@@ -21,7 +21,9 @@ public class CustomUserDetails implements UserDetails {
         this.password = user.getPassword();
         this.authorities = translate(user.getRoles());
     }
-
+//Обезбедува основна имплементација на корисничкиот интерфејс
+// Ја преведува листата <Улога> во листа <GrantedAuthority>
+// ја заменува влезната листа на улоги, i ja braka листаta на доделени органи
     private Collection<? extends GrantedAuthority> translate(List<Role> roles) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         for (Role role : roles) {
@@ -29,12 +31,14 @@ public class CustomUserDetails implements UserDetails {
             //Make sure that all roles start with "ROLE_"
             if (!name.startsWith("ROLE_"))
                 name = "ROLE_" + name;
-            authorities.add(new SimpleGrantedAuthority(name));
+            authorities.add(new SimpleGrantedAuthority(name));//add users authorities
         }
         return authorities;
     }
+//And then, once authenticated, we can access this object anywhere in the project like this.
+//CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-    @Override
+    @Override//return the custom User object
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
     }

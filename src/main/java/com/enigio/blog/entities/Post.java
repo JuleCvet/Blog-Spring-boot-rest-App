@@ -15,7 +15,7 @@ public class Post {
     private Date dateCreated;
 
     @ManyToOne
-    private User creator;
+    private User creator;//creatorot ima poveke postovi
 
 
 

@@ -13,7 +13,7 @@ public class User {
     private Long id;
     private String username;
 
-    @JsonIgnore
+    @JsonIgnore//ni go krie vo postman passwordot
     private String password;
     @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private List<Role> roles;
