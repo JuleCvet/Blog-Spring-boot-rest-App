@@ -46,4 +46,8 @@ public class BlogApplication extends SpringBootServletInitializer {
 	private UserDetailsService userDetailsService(final UserRepository repository) {
 		return username -> new CustomUserDetails(repository.findByUsername(username));
 	}//We return an instance of our CustomUserDetails
-}
+}//Tuka ni bara da PROVIDE userDetails, a ne User. Zatoa we will wrap this user so Klasa koj go
+	// implementira UserDetailsImplementation (), zema user I gi overriduva metodite.(CustomUserDetails)
+	//Ni treba geteri za Collection na authoritiees, username, password.  Ni treba I konstructor
+//shto zema User kako parameter. Gi setirame ostanatite na TRUE site. Vo main () setirame so koj user I pass ke se najavime,
+

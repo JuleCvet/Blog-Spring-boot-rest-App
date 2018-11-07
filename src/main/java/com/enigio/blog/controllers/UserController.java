@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 @RestController
-public class UserController {
-
+public class UserController {//ni treba nva klasa UserRegistration
+//Proveruva dali passwordite matchuvaat i dali voopshto userot postoi.
     @Autowired
     private UserService userService;
 
@@ -40,7 +40,10 @@ public class UserController {
         userService.save(new User(userRegistration.getUsername(), userRegistration.getPassword(),
                 Arrays.asList(new Role("USER"), new Role("ACTUATOR"))));
         return "User created";
-    }
+    }//-	Na OAuth2 moze so ovoj user da se logirame so POST auth I da postirame post so shto koga ke gi vidime posts,
+    // treba da ni razgranicuva koj creator koj post go napishal
+
+
 
     @GetMapping(value = "/users")
     public List<User> users(){
@@ -48,11 +51,11 @@ public class UserController {
     }
 
     @GetMapping(value = "/logouts")
-    public void logout(@RequestParam (value = "access_token") String accessToken){
-        tokenStore.removeAccessToken(tokenStore.readAccessToken(accessToken));
+    public void logout(@RequestParam (value = "access_token") String accessToken){//userot prvo ni go praka
+        tokenStore.removeAccessToken(tokenStore.readAccessToken(accessToken));//go remove od Store
     }
 
-    @GetMapping(value ="/getUsername")
+    @GetMapping(value ="/getUsername")//ni vraka imeto na currentUser ako e authenticated, anonymousUser vo sprotivno
     public String getUsername(){
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }

@@ -37,7 +37,8 @@ public class BlogController {
         return postService.getPost(id);
     }
 
-    @PostMapping(value="/post")//postman
+    @PostMapping(value="/post")//setirame nashiot creator kako loged in User.
+    	//Se proveruva preku kontrolerot so instance od CustomUserDetails.
     public String publishPost(@RequestBody Post post){//mapped so @RequestBody
         CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(post.getDateCreated() == null)//ako ne naglasime vreme, ni go dava lokalnto vreme so postMan (kako timeStamp)
@@ -48,7 +49,7 @@ public class BlogController {
         return "Post was published";
     }
 
-    @GetMapping(value="/posts/{username}")//postMan + admin
+    @GetMapping(value="/posts/{username}")
     public List<Post> postsByUser(@PathVariable String username){
         return postService.findByUser(userService.getUser(username));
     }

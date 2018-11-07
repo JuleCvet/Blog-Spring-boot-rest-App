@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CustomUserDetails implements UserDetails {
+public class CustomUserDetails implements UserDetails {//Ovde sredivme JPA i OAth2 vlez izlez so sequrity
 
     private Collection<? extends GrantedAuthority> authorities;
     private String password;//nashite user properties
@@ -23,7 +23,7 @@ public class CustomUserDetails implements UserDetails {
     }
 //Обезбедува основна имплементација на корисничкиот интерфејс
 // Ја преведува листата <Улога> во листа <GrantedAuthority>
-// ја заменува влезната листа на улоги, i ja braka листаta на доделени органи
+// ја заменува влезната листа на улоги, i ja vraka листаta на доделени органи
     private Collection<? extends GrantedAuthority> translate(List<Role> roles) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         for (Role role : roles) {

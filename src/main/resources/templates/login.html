@@ -36,22 +36,25 @@
         },
         methods: {
             login(){
-                var params = new URLSearchParams();
-                params.append('grant_type', 'password');
-                params.append('username', this.username);
+                var params = new URLSearchParams();//gi prakame ovie parametri preku new URL...
+                params.append('grant_type', 'password');//za da gi pratime vo axios body
+                params.append('username', this.username);//so this. za da gi zema od Post requestot
                 params.append('password',this.password);
-                axios({
+                axios({//otvarame axios regwest i dodavame:
                     method:'post',
                     url:'oauth/token',
                     auth:{username:'my-trusted-client',password:'secret'},
-                    headers: {"Content-type": "application/x-www-form-urlencoded; charset=utf-8"},
+                    headers: {"Content-type": "application/x-www-form-urlencoded; charset=utf-8"},//kopirame od postMan
                     data:params
                 }).then(function(response){
-                    set_cookie("access_token",response.data.access_token);
-                    document.location.replace("/");
+                    set_cookie("access_token",response.data.access_token);//imeto na fu-jata e "access_token"
+                    document.location.replace("/");//vtorovo gore e response, a ova go nasocuva Userot vo HOME
                 });
-            }
-        }
+            }//dsakame a pratime POST reguest I obtain token vo login. Co v-model vo index, gi mapirame so data od Vue
+            // Vo metods go imame login() koj ke praka POST koristejki go axios so shto go dobivame
+           // access tokenot following POST requestot to the URL (aouth/token)
+
+    }
     });
 </script>
 </html>

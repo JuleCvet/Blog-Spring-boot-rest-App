@@ -25,9 +25,9 @@
 
 <script>
     var app = new Vue({
-        el: '#root',
-        data : {posts: []},
-        mounted(){
+        el: '#root',//dovolno za GET+ v-forfor loop za povrzzuvame+ {{post.title}} I body
+        data : {posts: []},//shto sakame da prikazeme vo browser
+        mounted(){//as soon as application is loaded, do something
             this.fetchPosts();
         },
         methods: {
@@ -37,7 +37,7 @@
                 }.bind(this));
             },
             getLink(post){
-                return '/post/' + post.id;
+                return '/post/' + post.id;//pass the post and get the ID
             }
         }
 

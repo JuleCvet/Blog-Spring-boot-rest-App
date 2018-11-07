@@ -41,21 +41,24 @@
 <script>
     var app = new Vue({
         el: '#root',
-        data : {post: null, commentText: '', comments: []},
+        data : {post: null, commentText: '', comments: []},//eden prazen post, kommentText i poveke komentari
         created(){
             this.fetchPosts();
             this.fetchComments();
         },
         methods: {
             fetchPosts(){
-                axios.get("/the_post/" + this.getPostId()).then(function(response){
-                    this.post = response.data;
+                axios.get("/the_post/" + this.getPostId()).then(function(response){//prakame GETrequest do metodov the_post
+                    this.post = response.data;//and pass the ID od postot na koj userot kliknal, we are going to attach
                 }.bind(this));
             },
             isLoggedIn(){
                 return window.Event.isLoggedIn;
             },
-            doComment(){
+            doComment(){//Pravime nova post.html strana so data: poinakva + vo index stavame a:href pozadi post.title
+                // vo koj go povikuvame metodot GetLink(post) koj go pravime podolu vo Vue.
+
+
                 axios({
                     method:'post',
                     url:'postComment?access_token=' + getCookie("access_token"),
@@ -70,7 +73,7 @@
                 }.bind(this));
             },
             getPostId(){
-                var splitted = window.location.href.split('/');
+                var splitted = window.location.href.split('/');//ni go razdeluva Id
                 return splitted[splitted.length-1];
             }
         }

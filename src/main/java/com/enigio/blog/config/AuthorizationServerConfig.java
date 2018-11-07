@@ -12,10 +12,10 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
-@Configuration
+@Configuration//za da moze da go koristime Oath2
 @EnableAuthorizationServer//се користи за конфигурирање на OAuth 2.0 механизмот за авторизација на серверот
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
-
+//klasa koja go implementira AuthorizationServerConfigurer
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -30,7 +30,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Bean
     public TokenStore getTokenStore(){
         return new InMemoryTokenStore();
-    }
+    }//class InMemoryTokenStore implements TokenStore
 
     @Override//Поставување на клиенти со clientId, clientSecret, типови на грантови koristejki IN MEMORy configuration
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -44,6 +44,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) {
         security.checkTokenAccess("isAuthenticated()");
-    }//овде ги дефинираме безбедносните ограничувања на крајната точка на токен. Treba da kreirame nash AuthenticationManager
-    //da go @Autowired--> Checking isAuthenticated, што се враќа точно ако корисникот не е анонимен
+    }//овде ги дефинираме безбедносните ограничувања на крајната точка на токен.
+    // Treba da kreirame nash AuthenticationManager, da go @Autowired--> Checking isAuthenticated, што се враќа TRUE ако
+    // корисникот не е анонимен. PROVIDE authenticationManger I go @Autowired (vo DemoAplication go konfigurirame)
+
 }

@@ -1,0 +1,27 @@
+{
+  "name": "gulp",
+  "version": "1.0.0",
+  "main": "npm install myBlog/mypackage",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-less": "^4.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "\"homepage\": \"C:\\Users\\julij\\Downloads\\SpringBlog-master\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuleCvet/Blog-Spring-boot-rest-App.git"
+  },
+  "keywords": [
+    "Jule"
+  ],
+  "author": "Jule",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JuleCvet/Blog-Spring-boot-rest-App/issues"
+  },
+  "homepage": "https://github.com/JuleCvet/Blog-Spring-boot-rest-App#readme",
+  "description": ""
+}

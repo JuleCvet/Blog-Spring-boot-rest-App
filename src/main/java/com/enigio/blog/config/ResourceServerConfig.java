@@ -9,7 +9,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
-    //serves resources that are protected by the OAth2 tocen
+    //do resourse server go prakame access tokenot. Treba da se konfigurira I ovoj resourse server
+    //serves resources that are protected by the OAth2 token
 //it provides SpringSecurityAuthentication филтер koj ja implementira ovaa protekcija
     @Override
     public void configure(HttpSecurity http) throws Exception {
@@ -18,7 +19,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 //site mozat da ja vidat ovaa strana
                 .antMatchers("/","/home","/register","/login","/","/post","/post/**").permitAll()
                 .antMatchers("/private/**").authenticated()
-                .antMatchers("/post").authenticated()
+                .antMatchers("/post").authenticated()//POST ke moze da se koristi samo od authenticated users
                 .antMatchers("/post/postComment").authenticated()
                 .antMatchers(HttpMethod.DELETE , "/post/**").hasAuthority("ROLE_ADMIN");
     }

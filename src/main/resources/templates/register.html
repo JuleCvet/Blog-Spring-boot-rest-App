@@ -44,7 +44,7 @@
                     return;
                 }
                 axios({
-                    method:'post',
+                    method:'post',//make the post() to the URL "register" and attach a data
                     url:'register',
                     data:{username:this.username,password:this.password,passwordConfirmation:this.passwordConfirm}
                 }).then(function(response){
